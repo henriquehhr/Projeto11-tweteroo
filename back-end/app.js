@@ -20,3 +20,22 @@ app.post("/tweets", (req, res) => {
     tweets.push(req.body);
     res.send("OK");
 });
+
+app.get("/tweets", (req, res) => {
+
+    const lastTweets = [];
+    const lastIndex = tweets.length < 10 ? 0 : tweets.length - 10;
+    if (tweets.length == 0) {
+        res.send(lastTweets);
+        return;
+    }
+    for (let i = tweets.length - 1; i >= lastIndex; i--) {
+        const tweet = {
+            username: tweets[i].username,
+            avatar: users.find(user => user.username == tweets[i].username).avatar,
+            tweet: tweets[i].tweet
+        };
+        lastTweets.push(tweet);
+    }
+    res.send(lastTweets);
+});
