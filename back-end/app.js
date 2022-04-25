@@ -15,3 +15,8 @@ app.post("/sign-up", (req, res) => {
     users.push(req.body);
     res.send("OK");
 });
+
+app.post("/tweets", (req, res) => {
+    tweets.push(req.body);
+    res.send("OK");
+});
